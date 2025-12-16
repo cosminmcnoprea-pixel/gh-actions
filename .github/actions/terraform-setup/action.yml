@@ -1,0 +1,19 @@
+name: "Terraform: setup"
+description: "Installs a pinned Terraform version on the runner."
+
+inputs:
+  terraform-version:
+    description: "Terraform version (e.g. 1.6.0)"
+    required: false
+    default: "1.6.0"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: ${{ inputs.terraform-version }}
+        terraform_wrapper: false
+
+
