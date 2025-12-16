@@ -92,33 +92,33 @@ runs:
 
     - name: PHP tests
       if: inputs.run-tests == 'true'
-      uses: ./.github/actions/php-tests
+      uses: cosminmcnoprea-pixel/gh-actions/.github/actions/php-tests@main
       with:
         php-version: ${{ inputs.php-version }}
         working-directory: ${{ inputs.php-working-directory }}
 
     - name: GCP auth + tooling
-      uses: ./.github/actions/gcp-auth-setup
+      uses: cosminmcnoprea-pixel/gh-actions/.github/actions/gcp-auth-setup@main
       with:
         workload-identity-provider: ${{ inputs.workload-identity-provider }}
         service-account: ${{ inputs.service-account }}
         region: ${{ inputs.region }}
 
     - name: Build and push image
-      uses: ./.github/actions/docker-build-push
+      uses: cosminmcnoprea-pixel/gh-actions/.github/actions/docker-build-push@main
       with:
         image: ${{ steps.meta.outputs.image }}
         context: ${{ inputs.docker-context }}
         dockerfile: ${{ inputs.dockerfile }}
 
     - name: Upload static assets
-      uses: ./.github/actions/gcs-sync
+      uses: cosminmcnoprea-pixel/gh-actions/.github/actions/gcs-sync@main
       with:
         source: ${{ inputs.static-source }}
         bucket: ${{ inputs.static-bucket }}
 
     - name: Deploy to Cloud Run
-      uses: ./.github/actions/cloudrun-deploy
+      uses: cosminmcnoprea-pixel/gh-actions/.github/actions/cloudrun-deploy@main
       with:
         service-name: ${{ inputs.service-name }}
         image: ${{ steps.meta.outputs.image }}
@@ -127,14 +127,14 @@ runs:
 
     - name: Get service URL
       id: url
-      uses: ./.github/actions/cloudrun-get-url
+      uses: cosminmcnoprea-pixel/gh-actions/.github/actions/cloudrun-get-url@main
       with:
         service-name: ${{ inputs.service-name }}
         region: ${{ inputs.region }}
         project-id: ${{ inputs.project-id }}
 
     - name: Post-deploy smoke test
-      uses: ./.github/actions/http-smoke-test
+      uses: cosminmcnoprea-pixel/gh-actions/.github/actions/http-smoke-test@main
       with:
         url: ${{ steps.url.outputs.service-url }}
         path: ${{ inputs.smoke-path }}
