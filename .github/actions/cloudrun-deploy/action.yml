@@ -25,5 +25,3 @@ runs:
           --image="${{ inputs.image }}" \
           --region="${{ inputs.region }}" \
           --project="${{ inputs.project-id }}"
-
-

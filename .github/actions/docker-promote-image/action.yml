@@ -23,5 +23,3 @@ runs:
     - name: Push target image
       shell: bash
       run: docker push "${{ inputs.target-image }}"
-
-

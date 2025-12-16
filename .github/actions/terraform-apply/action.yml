@@ -37,5 +37,3 @@ runs:
         else
           terraform apply "${{ inputs.plan-file }}"
         fi
-
-

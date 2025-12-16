@@ -14,5 +14,3 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: terraform fmt -check -recursive
-
-

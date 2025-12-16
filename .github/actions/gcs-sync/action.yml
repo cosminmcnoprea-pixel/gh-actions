@@ -15,5 +15,3 @@ runs:
     - name: Sync to GCS
       shell: bash
       run: gsutil -m rsync -r -d "${{ inputs.source }}" "gs://${{ inputs.bucket }}/"
-
-

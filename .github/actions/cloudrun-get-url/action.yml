@@ -29,5 +29,3 @@ runs:
           --project="${{ inputs.project-id }}" \
           --format='value(status.url)')
         echo "service_url=${SERVICE_URL}" >> "$GITHUB_OUTPUT"
-
-

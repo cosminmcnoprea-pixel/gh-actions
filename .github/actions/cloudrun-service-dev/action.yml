@@ -139,5 +139,3 @@ runs:
         url: ${{ steps.url.outputs.service-url }}
         path: ${{ inputs.smoke-path }}
         expected: ${{ inputs.smoke-expected }}
-
-

@@ -24,5 +24,3 @@ runs:
     - name: Push image
       shell: bash
       run: docker push "${{ inputs.image }}"
-
-
