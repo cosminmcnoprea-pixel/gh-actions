@@ -34,6 +34,11 @@ inputs:
     required: false
     default: "Dockerfile"
 
+  build-method:
+    description: "docker or cloud-build"
+    required: false
+    default: "docker"
+
   # Static assets
   static-bucket:
     description: "GCS bucket for static assets"
@@ -105,11 +110,19 @@ runs:
         region: ${{ inputs.region }}
 
     - name: Build and push image
+      if: inputs.build-method == 'docker'
       uses: cosminmcnoprea-pixel/gh-actions/.github/actions/docker-build-push@main
       with:
         image: ${{ steps.meta.outputs.image }}
         context: ${{ inputs.docker-context }}
         dockerfile: ${{ inputs.dockerfile }}
+
+    - name: Build and push image (Cloud Build)
+      if: inputs.build-method == 'cloud-build'
+      uses: cosminmcnoprea-pixel/gh-actions/.github/actions/cloud-build-build-push@main
+      with:
+        image: ${{ steps.meta.outputs.image }}
+        context: ${{ inputs.docker-context }}
 
     - name: Upload static assets
       uses: cosminmcnoprea-pixel/gh-actions/.github/actions/gcs-sync@main

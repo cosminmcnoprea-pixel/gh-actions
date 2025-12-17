@@ -17,4 +17,5 @@ Most workflows assume:
 - `WIF_PROVIDER_DEV` / `WIF_SERVICE_ACCOUNT_DEV`
 - `WIF_PROVIDER_PROD` / `WIF_SERVICE_ACCOUNT_PROD`
 
-
+### Cloud Build (optional)
+Dev deploy supports building the container via Cloud Build.
